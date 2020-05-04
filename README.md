@@ -1,21 +1,22 @@
-### Installation
+## Installation
 ```
 git clone https://github.com/plusoneee/nchu.zero2hero.git
 ```
-#### Prerequisites
+### Prerequisites
 - Python Version: 3
-#### Install Requirements
+### Install Requirements
 (Optional) If you want to use `virtualenv`: 
 ```
 pip3 install virtualenv
 virtualenv .venv
 source .venv/bin/activate
 ```
-Install packages using requirements.txt.
+Install packages using `requirements.txt` in the `./installation` folder. 
 ```
+cd installation
 pip install -r requirements.txt
 ```
-#### Run Jupyterlab
+### Run Jupyterlab
 Launch JupyterLab using the command: 
 ```
 jupyter lab
