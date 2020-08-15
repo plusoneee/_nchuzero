@@ -2,3 +2,5 @@ jupyterlab
 pandas
 numpy
 matplotlib
+torch
+torchvision 
