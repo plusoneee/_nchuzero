@@ -1,6 +1,6 @@
 ## Installation
 ```
-git clone https://github.com/plusoneee/nchu.zero2hero.git
+git clone https://github.com/plusoneee/_nchuzero.git
 ```
 ### Prerequisites
 - Python Version: 3
