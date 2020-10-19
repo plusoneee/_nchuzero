@@ -16,7 +16,7 @@ if __name__ == '__main__':
     # instance it
     joy = Person('Joy')
 
-    # now, we have an People object.
+    # now, we have an Person object.
     # and this object is able to say hi.
     joy.say_hi()
 

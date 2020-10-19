@@ -33,10 +33,10 @@ if __name__ == '__main__':
     byul = SoulMate('byul', ['cool', 'experience', 'tattoos'])
     byul.list_in_common()
 
-    # inherit the methods 'say_hi()' from the People.
+    # inherit the methods 'say_hi()' from the Person.
     byul.say_hi()
 
-    # inherit the attribute 'birthday' from the People
+    # inherit the attribute 'birthday' from the Person
     byul.birthday = '1997-12-20'
     print(byul.birthday)
 
