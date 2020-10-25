@@ -19,11 +19,13 @@ class Lover(SoulMate):
     def do_something(cls):
         print(cls.weekends_with_you)
 
+
     def add_memory(self, memory):
         self.memories.append(memory)
 
     def recall_memory(self):
-        print(self.memories)
+        for memory in self.memories:
+            print(memory.to_dictionary())
         return self.memories
 
 if __name__ == '__main__':
@@ -35,5 +37,7 @@ if __name__ == '__main__':
 
     # could replace the function 'say_hi()' from People.
     jian.say_hi()
+
+
 
 
