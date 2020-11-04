@@ -8,6 +8,9 @@ from sklearn.preprocessing import Normalizer, RobustScaler, StandardScaler
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from sklearn.linear_model import LinearRegression
+from sklearn import tree
+
 '''
 Filter:
     mask = df['col_name'] == '?'
@@ -17,6 +20,20 @@ Replace:
 
 Convert ignore NAN:
     df['col_name'] = df['col_name'].replace('?', np.NaN).astype(float)
+
+Replace:
+    df['col_name'].replace(('yes', 'no'), (1, 0)), inplace=True)
+    
+Drop:
+    X = df.drop(['col_name'], axis=1)
+
+Train and Test Split
+    from sklearn.model_selection import train_test_split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state=1000)
+    
+Cross Validation
+    from sklearn.model_selection import
+    scores = cross_val_score(lr, boston.data, boston.target, cv=3, scoring='r2')
 
 '''
 
@@ -82,6 +99,7 @@ class Standardize:
 
     @staticmethod
     def normailizer(df, method='l2'):
+        # methods: max, l1, l2
         no = Normalizer(norm=method)
         # reshape np array to fit_transform
         col_array = df.to_numpy()
@@ -153,5 +171,35 @@ class ValueReplacer:
         with open('./'+file_path, 'w') as f:
             json.dump(content, f)
 
+class Model:
 
+    def __init__(self):
+        self.X_train = None
+        self.y_train = None
+        self.X_test = None
+        self.y_test = None
+
+    def fit_linear_regression(self):
+        lr = LinearRegression()
+        X_train = self.X_train
+        y_train = self.y_train
+        X_test = self.X_test
+        y_test = self.y_test
+
+        lr.fit(X_train, y_train)
+        print('Linear Regression Score:', lr.score(X_test, y_test))
+        print('Coefficient:', lr.coef_)
+        return lr
+
+    def fit_decision_tree(self, max_depth=4):
+        dt = tree.DecisionTreeClassifier(max_depth)
+        X_train = self.X_train
+        y_train = self.y_train
+        X_test = self.X_test
+        y_test = self.y_test
+
+        dt.fit(X_train, y_train)
+        print('Decision Tree Classifier Score:', dt.score(X_test, y_test))
+
+        return dt
 
