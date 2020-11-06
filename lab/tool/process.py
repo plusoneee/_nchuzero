@@ -8,7 +8,7 @@ from sklearn.preprocessing import Normalizer, RobustScaler, StandardScaler
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, RANSACRegressor, LogisticRegression
 from sklearn import tree
 
 '''
@@ -33,7 +33,24 @@ Train and Test Split
     
 Cross Validation
     from sklearn.model_selection import
-    scores = cross_val_score(lr, boston.data, boston.target, cv=3, scoring='r2')
+    scores = cross_val_score(lr, X, Y, cv=3, scoring='r2') #scoring: accuracy
+
+Precision Score
+    from sklearn.metrics import precision_score
+    precision_score(Y_test, lr.predict(X_test))
+    
+Recall Score
+    from sklearn.metrics import recall_score
+    recall_score(Y_test, lr.predict(X_test))
+
+f-measure Score
+    from sklearn.metrics import fbeta_score, f1_score
+    f1_score(Y_test, lr.predict(X_test))
+    fbeta_score(Y_test, lr.predict(X_test), beta=1)
+    # When beta=1, fbeta_score = s1_scroe
+    # A beta less than 1 gives more importance to precision 
+    # A value greater than 1 gives more importance to recall
+    
 
 '''
 
@@ -171,6 +188,7 @@ class ValueReplacer:
         with open('./'+file_path, 'w') as f:
             json.dump(content, f)
 
+
 class Model:
 
     def __init__(self):
@@ -191,6 +209,17 @@ class Model:
         print('Coefficient:', lr.coef_)
         return lr
 
+    def fit_ransac_regressor(self, random_state=0):
+        # X, y = make_regression(n_samples = 200, n_features = 2, noise = 4.0, random_state = 0)
+        X_train = self.X_train
+        y_train = self.y_train
+        X_test = self.X_test
+        y_test = self.y_test
+
+        rs = RANSACRegressor(random_state).fit(X_train, y_train)
+        print('RANSACRegressor Score:', rs.score(X_test, y_test))
+        return rs
+
     def fit_decision_tree(self, max_depth=4):
         dt = tree.DecisionTreeClassifier(max_depth)
         X_train = self.X_train
@@ -200,6 +229,16 @@ class Model:
 
         dt.fit(X_train, y_train)
         print('Decision Tree Classifier Score:', dt.score(X_test, y_test))
-
         return dt
+
+    def fit_logistic_regression(self):
+        lg = LogisticRegression()
+        X_train = self.X_train
+        y_train = self.y_train
+        X_test = self.X_test
+        y_test = self.y_test
+
+        lg.fit(X_train, y_train)
+        print('Logistic regression score: %.3f' % lg.score(X_test, y_test))
+        return lg
 
