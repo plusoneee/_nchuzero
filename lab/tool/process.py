@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 from sklearn.linear_model import LinearRegression, RANSACRegressor, LogisticRegression
+from sklearn.svm import SVC
 from sklearn import tree
 
 '''
@@ -50,7 +51,14 @@ f-measure Score
     # When beta=1, fbeta_score = s1_scroe
     # A beta less than 1 gives more importance to precision 
     # A value greater than 1 gives more importance to recall
+
+ROC 
+    from sklearn.metrics import roc_curve
+    fpr, tpr, thresholds = roc_curve(Y_test, Y_score)
     
+AUC 
+    from sklearn.metrics import auc
+    auc(fpr, tpr)
 
 '''
 
@@ -241,4 +249,24 @@ class Model:
         lg.fit(X_train, y_train)
         print('Logistic regression score: %.3f' % lg.score(X_test, y_test))
         return lg
+
+    def fit_svm(self, ovr=False):
+        # one-versus-rest
+        if ovr:
+            svc = SVC(decision_function_shape='ovr')
+        else:
+            svc = SVC(kernel='linear')
+        X_train = self.X_train
+        y_train = self.y_train
+        X_test = self.X_test
+        y_test = self.y_test
+        svc.fit(X_train, y_train)
+        # get support vectors
+        # clf.support_vectors_
+        # get indices of support vectors
+        # clf.support_
+        # get number of support vectors for each class
+        # clf.n_support_
+        return svc
+
 
