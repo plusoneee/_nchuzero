@@ -1,0 +1,12 @@
+model:
+  input_size: 1
+  output_size: 1
+  batch_size: 32
+  learning_rate: 0.0003
+  epochs: 30
+  plot: no
+  save:
+    need: yes
+    version: 'v1'
+    name: 'simple_model_${model.save.version}.pkl'
+
