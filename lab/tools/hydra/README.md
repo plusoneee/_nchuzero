@@ -2,12 +2,7 @@
 
 > The key feature is the ability to dynamically create a hierarchical configuration by composition and override it through config files and the command line
 
-The main objective use Hydra is to speed up our training pipeline by configuration.
-
-
-Here, will show how to use `Hydra` in your ML/DL project to set up our model hyperparameters.
-
-If you want to know more about how to use `Hydra`, the document is available [here](https://hydra.cc/docs/intro).
+In my opinions, Hydra could speed up training pipeline by configuration. so, here will show how to use `Hydra` in your ML/DL project to set up our model hyperparameters. If you want to know more about how to use `Hydra`, the document is available [here](https://hydra.cc/docs/intro).
 
 ### Installation
 First, install `hydra-core`.
@@ -37,8 +32,7 @@ model:
     name: 'simple_model_${model.save.version}.pkl'
 ```
 
-Here is an easy way to update config values via the command line. 
-* For example, `plot=no` by default, you can change the parameters directly like this：
+Here is an easy way to update config values via the command line. For example, `plot=no` by default, you can change the parameters directly like this：
 ```
 python app.py model.plot=yes
 ```
